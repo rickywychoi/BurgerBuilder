@@ -1,28 +1,18 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import classes from './App.css';
+import Aux from './hoc/Aux'
+import withClasses from './hoc/WithClasses';
+import Layout from './components/Layout/Layout';
+import BurgerBuilder from './containers/BurgerBuilder';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+const app = (props) => {
+  return (
+    <Aux>
+      <Layout>
+        <BurgerBuilder />
+      </Layout>
+    </Aux>
+  );
 }
 
-export default App;
+export default withClasses(app, classes.App);
