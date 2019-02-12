@@ -6,16 +6,16 @@ import Modal from '../components/UI/Modal/Modal';
 import OrderSummary from '../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
-  'salad': 0.3,
   'bacon': 0.7,
+  'salad': 0.3,
   'cheese': 0.4,
   'meat': 1.3,
 }
 class BurgerBuilder extends Component {
   state = {
     ingredients: {
-      'salad': 0,
       'bacon': 0,
+      'salad': 0,
       'cheese': 0,
       'meat': 0,
     },
@@ -34,6 +34,10 @@ class BurgerBuilder extends Component {
   orderFinalizeHandler = () => {
     this.setState({orderFinalize: true});
   };
+
+  purchaseCancelHandler = () => {
+    this.setState({orderFinalize: false})
+  }
 
   addIngredientHandler = (type) => {
     const oldCount = this.state.ingredients[type];
@@ -78,10 +82,11 @@ class BurgerBuilder extends Component {
     }
     return (
       <Aux>
-        <Modal orderFinalize={this.state.orderFinalize}>
+        <Modal modalShow={this.state.orderFinalize}>
           <OrderSummary 
             ingredients={this.state.ingredients}
             price={this.state.totalPrice}
+            modalClose={this.purchaseCancelHandler}
           />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
@@ -92,6 +97,7 @@ class BurgerBuilder extends Component {
           price={this.state.totalPrice}
           orderable={this.state.orderable}
           showModal={this.orderFinalizeHandler}
+          ingredients={this.state.ingredients}
         />
       </Aux>
     )

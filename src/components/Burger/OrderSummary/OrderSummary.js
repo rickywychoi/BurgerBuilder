@@ -12,6 +12,10 @@ const orderSummary = (props) => {
     })
   return (
     <Aux>
+      <button onClick={props.modalClose} type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <br />
       <h3>Order Summary</h3>
       <div style={style}>
         <p>Your Burger with Following Ingredients:</p>

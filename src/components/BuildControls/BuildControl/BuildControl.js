@@ -1,6 +1,10 @@
 import React from 'react';
 import classes from './BuildControl.css';
 
+const style = {
+  margin: '0 0 0 10px'
+}
+
 const buildControl = (props) => {
   return (
     <div className={classes.BuildControl}>
@@ -12,6 +16,7 @@ const buildControl = (props) => {
       <button 
         className={classes.More} 
         onClick={props.added}>+</button>
+      {props.clicked ? <strong style={style}>({props.numOfItemSelected})</strong> : null}
     </div>
   );
 }

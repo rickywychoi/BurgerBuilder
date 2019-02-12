@@ -4,8 +4,8 @@ import BuildControl from './BuildControl/BuildControl';
 
 const buildControls = (props) => {
   const control = [
-    {label: 'Salad', type: 'salad'},
     {label: 'Bacon', type: 'bacon'},
+    {label: 'Salad', type: 'salad'},
     {label: 'Cheese', type: 'cheese'},
     {label: 'Meat', type: 'meat'},
   ].map(ctrl => 
@@ -15,6 +15,8 @@ const buildControls = (props) => {
       added={()=>props.ingredientAdded(ctrl.type)}
       removed={()=>props.ingredientRemoved(ctrl.type)}
       disabled={props.disabled[ctrl.type]}
+      numOfItemSelected={props.ingredients[ctrl.type]}
+      clicked={props.orderable}
     />
   );
 
