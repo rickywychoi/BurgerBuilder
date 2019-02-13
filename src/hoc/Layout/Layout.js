@@ -1,10 +1,10 @@
 import React from 'react';
-import Aux from '../../hoc/Aux';
+import Aux from '../Aux';
+import Navbar from '../../components/UI/Navbar/Navbar';
 
 const layout = (props) => (
   <Aux>
-    <div>Navbar, SideDrawer</div>
-    <hr />
+    <Navbar />
     <main>
       {props.children}
     </main>
