@@ -10,11 +10,11 @@ const burger = (props) => {
       // parameter '_' is curious.
       return <BurgerIngredient key={igKey + i} type={igKey} />
     });
-  // flatten the array
+  // flatten the array => to check the total num of the whole ingredients
   }).reduce((accumulator,currentValue) => 
   accumulator.concat(currentValue),[]);
 
-  console.log(receivedIngredients);
+  console.log('[receivedIngredients] ', receivedIngredients);
 
   if(receivedIngredients.length === 0) {
     receivedIngredients = <p>Please fill ingredients in!</p>

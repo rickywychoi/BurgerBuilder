@@ -3,7 +3,7 @@ import classes from './BuildControls.css';
 import BuildControl from './BuildControl/BuildControl';
 
 const buildControls = (props) => {
-  const control = [
+  const control = [   // control for add or remove ingredients
     {label: 'Bacon', type: 'bacon'},
     {label: 'Salad', type: 'salad'},
     {label: 'Cheese', type: 'cheese'},
