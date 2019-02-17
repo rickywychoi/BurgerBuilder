@@ -11,14 +11,19 @@ const withErrorHandler = (WrappedComponent, axios) => {
         error: null
       };
       this.backToPage.bind(this);
-      axios.interceptors.request.use(req=>req, error=>{
+      this.reqInterceptor = axios.interceptors.request.use(req=>req, error=>{
         this.setState({error: null});
         return Promise.reject(error);
       });
-      axios.interceptors.response.use(res=>res, error=>{
+      this.resInterceptor = axios.interceptors.response.use(res=>res, error=>{
         this.setState({error: error});
         return Promise.reject(error);
       });
+    }
+
+    componentWillMount() {
+      axios.interceptors.request.eject(this.reqInterceptor);    // Clean up for in case withErrorHandler ends calling axios interceptors for wrapped children components
+      axios.interceptors.request.eject(this.resInterceptor);
     }
 
     backToPage = () => {
