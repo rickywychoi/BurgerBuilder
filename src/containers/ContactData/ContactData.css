@@ -9,10 +9,6 @@
   background-color: white;
 }
 
-.Input {
-  display: block;
-}
-
 @media (min-width: 600px) {
   .ContactData {
     width: 500px;

@@ -31,11 +31,15 @@ class Orders extends Component {
     console.log('[Orders.js state]', this.state.orders);
     return (
     <div>
+      <a
+        href='#'
+        onClick={()=>!window.open('https://burger-builder-a99e6.firebaseio.com/')}>[backend]: burger-builder-a99e6.firebaseio.com/</a>
       {this.state.orders.map(order=>(
         <Order 
           key={order.id} 
           ingredients={order.ingredients}
-          price={order.totalPrice}/>
+          price={order.totalPrice}
+          orderData={order.orderData}/>
       ))}
     </div>
     );

@@ -4,7 +4,7 @@
 }
 
 .Burger {
-  margin: 30px 0 60px 0;
-  max-width: 100%;
+  margin: 40px auto 60px auto;
+  max-width: 250px;
   height: auto;
 }

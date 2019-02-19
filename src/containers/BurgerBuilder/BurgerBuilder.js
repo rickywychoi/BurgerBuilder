@@ -116,9 +116,6 @@ class BurgerBuilder extends Component {
       burger = (
         <Aux>
           <Burger ingredients={this.state.ingredients} />
-          <a
-            href='/burgerbuilder'
-            onClick={()=>!window.open('https://burger-builder-a99e6.firebaseio.com/')}>[backend]: burger-builder-a99e6.firebaseio.com/</a>
           <BuildControls 
             ingredientAdded={this.addIngredientHandler}
             ingredientRemoved={this.removeIngredientHandler}
