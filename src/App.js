@@ -1,15 +1,24 @@
 import React from 'react';
 import classes from './App.css';
-import Aux from './hoc/Aux'
+import Aux from './hoc/Aux';
 import withClasses from './hoc/withClasses';
 import Layout from './hoc/Layout/Layout';
-import BurgerBuilder from './containers/BurgerBuilder';
+import Home from './components/Home/Home';
+import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
+import Checkout from './containers/Checkout/Checkout';
+import Orders from './containers/Orders/Orders';
+import { Route, Switch } from 'react-router-dom';
 
-const app = (props) => {
+const app = () => {
   return (
     <Aux>
       <Layout>
-        <BurgerBuilder />
+        <Switch>
+          <Route path="/burgerbuilder" component={BurgerBuilder}/>
+          <Route path="/checkout" component={Checkout}/>
+          <Route path="/orders" component={Orders}/>
+          <Route exact path="/" component={Home}/>
+        </Switch>
       </Layout>
     </Aux>
   );

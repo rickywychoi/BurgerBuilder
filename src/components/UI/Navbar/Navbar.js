@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from '../Logo/Logo';
 import NavItems from './NavItems/NavItems';
 
-const navbar = (props) => {
+const navbar = () => {
   return (
     <nav className="navbar navbar-dark bg-dark navbar-expand-lg mb-3">
       <a href="/">
