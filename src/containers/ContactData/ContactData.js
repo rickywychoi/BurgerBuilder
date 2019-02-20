@@ -9,12 +9,17 @@ class ContactData extends Component {
   state = {
     orderForm: {
       name: {
-        elementType: 'input',
+        elementType: 'input',   // html type
         elementConfig: {
-          type: 'text',
+          type: 'text',   // input tag type
           placeholder: 'Your Name',
         },
-        value: ''
+        value: '',    // input value
+        validation: {
+          required: true,    // input validation
+          maximumLength: 35
+        },
+        valid: false    // isValid?
       },
       email: {
         elementType: 'input',
@@ -22,7 +27,12 @@ class ContactData extends Component {
           type: 'email',
           placeholder: 'Your E-mail',
         },
-        value: ''
+        value: '',
+        validation: {
+          required: true,
+          maximumLength: 62
+        },
+        valid: false
       },
       street: {
         elementType: 'input',
@@ -30,7 +40,12 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Street',
         },
-        value: ''
+        value: '',
+        validation: {
+          required: true,
+          maximumLength: 95
+        },
+        valid: false
       },
       postalCode: {
         elementType: 'input',
@@ -38,7 +53,11 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Postal Code',
         },
-        value: ''
+        value: '',
+        validation: {
+          required: true
+        },
+        valid: false
       },
       deliveryType: {
         elementType: 'select',
@@ -49,7 +68,11 @@ class ContactData extends Component {
             {value: 'normal', displayValue: 'Normal'},
           ]
         },
-        value: ''
+        value: '',
+        validation: {
+          required: true
+        },
+        valid: false
       },
     },
     loading: false,
@@ -79,6 +102,19 @@ class ContactData extends Component {
       })
   }
 
+  checkValidity(value, rules) {
+    let isValid = true;
+
+    if(rules.required) {
+      isValid = value.trim() !== '' &&isValid;
+    }
+    if(rules.maximumLength) {
+      isValid = value.length <= rules.maximumLength &&isValid;
+    }
+
+    return isValid;
+  }
+
   inputChangedHandler = (event, inputIdentifier) => {
     // setState values immutably
     const updatedOrderForm = {
@@ -88,11 +124,14 @@ class ContactData extends Component {
       ...updatedOrderForm[inputIdentifier]    // copy the content for each properties
     };
     updatedFormElement.value = event.target.value;
+    updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
     updatedOrderForm[inputIdentifier] = updatedFormElement;
     this.setState({orderForm: updatedOrderForm});
   }
 
   render() {
+    console.log('[ContactData.js state] ', this.state);
+
     const formElementsArray = [];
     for (let key in this.state.orderForm) {
       formElementsArray.push({
@@ -108,6 +147,8 @@ class ContactData extends Component {
             elementType={formElement.config.elementType} 
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
+            invalid={formElement.config.valid}
+            // inputRef={this.props.formRef}
             changed={(event)=>this.inputChangedHandler(event, formElement.id)} />
         ))}
         <div className="mt-3">

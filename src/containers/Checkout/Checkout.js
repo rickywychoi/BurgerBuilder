@@ -5,10 +5,15 @@ import { Route } from 'react-router-dom';
 import ContactData from '../ContactData/ContactData';
 
 class Checkout extends Component {
-  state = {
-    ingredients: null,
-    totalPrice: 0,
+  constructor(props) {
+    super(props);
+    this.state = {
+      ingredients: null,
+      totalPrice: 0,
+    }
+    // this.focusContactFormRef = React.createRef();
   }
+  
 
   componentWillMount() {
     console.log(this.props);
@@ -29,15 +34,17 @@ class Checkout extends Component {
     });
   }
 
-  checkoutCancelHandler = () => {
+  checkoutCancelHandler = () => {   // This way of creating method in class doesn't need binding in constructor
     this.props.history.goBack();
   }
 
   checkoutContinueHandler = () => {
-    this.props.history.replace('/checkout/contact-data');    
+    this.props.history.replace('/checkout/contact-data');
+    // this.focusContactFormRef.focus();
   }
 
   render() {
+    console.log(this.focusContactFormRef);
     return(
       <Aux>
         <CheckoutSummary 
@@ -45,8 +52,15 @@ class Checkout extends Component {
           checkoutCancelled={this.checkoutCancelHandler}
           checkoutContinued={this.checkoutContinueHandler}/>
         <Route 
-          path={this.props.match.path + '/contact-data'} 
-          render={(props)=>(<ContactData ingredients={this.state.ingredients} totalPrice={this.state.totalPrice} {...props} />)} />
+          path={this.props.match.path + '/contact-data'}
+          // ref={this.focusContactFormRef}
+          render={(props)=>(
+            <ContactData 
+              ingredients={this.state.ingredients} 
+              totalPrice={this.state.totalPrice}
+              // formRef={this.props.ref}
+              {...props} />)}
+        />
       </Aux>
     );
   }
